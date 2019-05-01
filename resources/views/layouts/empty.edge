@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+      @section('title')
+      @endsection
+  </title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/main.css">
+   
+</head>
+<body>
+    <div class="app-container
+        @!section('current-class')
+    " style="
+    @!section('custom-style-app-container')
+    ">
+        @!section('content')
+      
+    
+    </div>
+ <script src="/js/components/vendor.js"></script>
+ <script src="/js/components/firstComp.js"></script>
+</body>
+</html>
