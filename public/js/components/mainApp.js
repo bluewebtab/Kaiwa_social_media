@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 293:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,6 +9,14 @@ webpackJsonp([0],{
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _regenerator = __webpack_require__(191);
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(190);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _classCallCheck2 = __webpack_require__(57);
 
@@ -34,19 +42,56 @@ var _reactDom = __webpack_require__(44);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _axios = __webpack_require__(189);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ComposeSection = function (_Component) {
   (0, _inherits3.default)(ComposeSection, _Component);
 
   function ComposeSection() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, ComposeSection);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (ComposeSection.__proto__ || Object.getPrototypeOf(ComposeSection)).call(this));
 
-    _this.clickedBtn = function () {
-      console.log("swag");
-    };
+    _this.submitForm = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var post;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return _axios2.default.post("/api/post", {
+                content: "Hey I just went to starbucks",
+                user_id: 1,
+                type: "text"
+              });
+
+            case 3:
+              post = _context.sent;
+
+              console.log(post);
+              _context.next = 10;
+              break;
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+
+              console.log(_context.t0);
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[0, 7]]);
+    }));
 
     _this.state = {
       name: "Joe"
@@ -77,7 +122,7 @@ var ComposeSection = function (_Component) {
           ),
           _react2.default.createElement(
             "div",
-            { className: "button send-btn" },
+            { className: "button send-btn", onClick: this.submitForm },
             _react2.default.createElement("i", { className: "fas fa-paper-plane" })
           )
         )
@@ -91,7 +136,7 @@ exports.default = ComposeSection;
 
 /***/ }),
 
-/***/ 294:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -236,7 +281,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 295:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -329,7 +374,7 @@ exports.default = LoadingComp;
 
 /***/ }),
 
-/***/ 296:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -755,7 +800,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 297:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1124,7 +1169,7 @@ exports.default = Posts;
 
 /***/ }),
 
-/***/ 298:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1239,11 +1284,11 @@ exports.default = SearchHeader;
 "use strict";
 
 
-var _regenerator = __webpack_require__(301);
+var _regenerator = __webpack_require__(191);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(300);
+var _asyncToGenerator2 = __webpack_require__(190);
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
@@ -1271,31 +1316,31 @@ var _reactDom = __webpack_require__(44);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(292);
+var _axios = __webpack_require__(189);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _LeftMenu = __webpack_require__(294);
+var _LeftMenu = __webpack_require__(296);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(296);
+var _Messenger = __webpack_require__(298);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(298);
+var _SearchHeader = __webpack_require__(300);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _ComposeSection = __webpack_require__(293);
+var _ComposeSection = __webpack_require__(295);
 
 var _ComposeSection2 = _interopRequireDefault(_ComposeSection);
 
-var _Posts = __webpack_require__(297);
+var _Posts = __webpack_require__(299);
 
 var _Posts2 = _interopRequireDefault(_Posts);
 
-var _LoadingComp = __webpack_require__(295);
+var _LoadingComp = __webpack_require__(297);
 
 var _LoadingComp2 = _interopRequireDefault(_LoadingComp);
 
