@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import axios from "axios";
 import LeftMenu from "./components/LeftMenu";
 import Messenger from "./components/Messenger";
