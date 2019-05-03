@@ -299,6 +299,7 @@
   }
 
   #posts {
+    margin-bottom: 4rem;
     .update-container {
       max-width: 630px;
       width: 100%;
@@ -344,7 +345,7 @@
         .image {
           position: relative;
           z-index: 2;
-          margin: 25px 0 50px;
+          margin: 15px 0 50px;
           height: 300px;
           width: 100%;
           border-radius: 5px;
@@ -361,6 +362,184 @@
         position: relative;
         top: -50px;
         padding: 50px 20px;
+        background: $backgroundContent;
+
+        -webkit-box-shadow: 3px 19px 18px -8px rgba(0, 0, 0, 0.35);
+        box-shadow: 3px 19px 18px -8px rgba(0, 0, 0, 0.35);
+        .update-info {
+          h3 {
+            text-transform: uppercase;
+            font-weight: 600;
+            color: $htext;
+            line-height: 1.5;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+          }
+          p {
+            color: $ptext;
+            line-height: 2;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+          }
+        }
+        .update-stats {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          padding: 15px 0;
+          border-top: 2px solid $border;
+          border-bottom: 2px solid $border;
+          margin-bottom: 30px;
+          .icon-section {
+            .like-circle {
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-pack: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              height: 20px;
+              width: 20px;
+              font-size: 0.6rem;
+              color: white;
+              border-radius: 50%;
+              background: rgb(9, 121, 98);
+              background: -webkit-gradient(
+                linear,
+                left top,
+                right top,
+                from(rgba(9, 121, 98, 1)),
+                color-stop(0%, rgba(0, 180, 255, 1))
+              );
+              background: linear-gradient(
+                90deg,
+                rgba(9, 121, 98, 1) 0%,
+                rgba(0, 180, 255, 1) 0%
+              );
+              .fa-thumbs-up {
+                position: relative;
+                top: -1px;
+              }
+            }
+          }
+          .other-users {
+            width: 70%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding-left: 10px;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            color: $veryLightText;
+            font-size: 0.8rem;
+          }
+          .comments-stats {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 30%;
+            color: $veryLightText;
+            font-size: 0.8rem;
+          }
+        }
+        .compose-comment {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          position: relative;
+
+          textarea {
+            position: relative;
+            z-index: 2;
+            border: none;
+            height: 40px;
+            width: 100%;
+            border-radius: 20px;
+            -webkit-box-shadow: $boxshadowbtns;
+            box-shadow: $boxshadowbtns;
+          }
+          .buttons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            .repost-btn {
+              height: 40px;
+              width: 40px;
+              background: white;
+              -webkit-box-shadow: $boxshadowbtns;
+              box-shadow: $boxshadowbtns;
+              color: $darksideBlue;
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              border-radius: 50%;
+              margin-left: 20px;
+            }
+            .like-btn {
+              height: 40px;
+              width: 40px;
+              background: -webkit-gradient(
+                linear,
+                left top,
+                right top,
+                from(rgba(9, 121, 98, 1)),
+                color-stop(0%, rgba(0, 180, 255, 1))
+              );
+              background: linear-gradient(
+                90deg,
+                rgba(9, 121, 98, 1) 0%,
+                rgba(0, 180, 255, 1) 0%
+              );
+              -webkit-box-shadow: $boxshadowbtns;
+              box-shadow: $boxshadowbtns;
+              color: white;
+              display: -webkit-box;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              border-radius: 50%;
+              margin-left: 20px;
+              .fa-thumbs-up {
+                position: relative;
+                top: -2px;
+              }
+            }
+          }
+        }
+      }
+      .mod-container {
+        z-index: 1;
+        // position: relative;
+        margin-bottom: 1.5rem;
+        top: -50px;
+        padding: 20px 20px;
         background: $backgroundContent;
 
         -webkit-box-shadow: 3px 19px 18px -8px rgba(0, 0, 0, 0.35);
