@@ -1,8 +1,18 @@
 "use strict";
+const Post = use("App/Models/Post");
 
 class ApiController {
   async initialApp({ auth }) {
-    return auth.user;
+    try {
+      const latestPosts = await Post.query()
+        .innerJoin("users", "users.id", "posts.user_id")
+        .options({ nestTables: true })
+        .fetch();
+      console.log(latestPosts.toJSON());
+      return { userInfo: auth.user, latestPosts };
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

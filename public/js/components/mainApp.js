@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,6 +9,10 @@ webpackJsonp([0],{
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _defineProperty2 = __webpack_require__(329);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _regenerator = __webpack_require__(191);
 
@@ -67,8 +71,8 @@ var ComposeSection = function (_Component) {
               _context.prev = 0;
               _context.next = 3;
               return _axios2.default.post("/api/post", {
-                content: "Hey I just went to starbucks",
-                user_id: 1,
+                content: _this.state.post_content,
+                user_id: _this.props.initialData.userInfo.id,
                 type: "text"
               });
 
@@ -93,9 +97,16 @@ var ComposeSection = function (_Component) {
       }, _callee, _this2, [[0, 7]]);
     }));
 
-    _this.state = {
-      name: "Joe"
+    _this.handleChange = function (event) {
+      var name = event.target.name;
+      var value = event.target.type == "checkbox" ? event.target.checked : event.target.value;
+
+      _this.setState((0, _defineProperty3.default)({}, name, value), function () {
+        console.log(_this.state);
+      });
     };
+
+    _this.state = {};
     return _this;
   }
 
@@ -105,7 +116,14 @@ var ComposeSection = function (_Component) {
       return _react2.default.createElement(
         "section",
         { className: "compose-section" },
-        _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
+        _react2.default.createElement("textarea", {
+          name: "post_content",
+          rows: 8,
+          cols: 80,
+          defaultValue: "",
+          onChange: this.handleChange,
+          value: this.state.post_content
+        }),
         _react2.default.createElement("div", { className: "user-img" }),
         _react2.default.createElement(
           "div",
@@ -136,7 +154,7 @@ exports.default = ComposeSection;
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -195,83 +213,95 @@ var LeftMenu = function (_Component) {
   (0, _createClass3.default)(LeftMenu, [{
     key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        "section",
-        { id: "left-menu" },
-        _react2.default.createElement(
+      if (this.props.initialData.userInfo == undefined) {
+        return _react2.default.createElement(
           "div",
-          { className: "account-dropdown" },
+          null,
+          "Loading"
+        );
+      } else {
+        var _props$initialData$us = this.props.initialData.userInfo,
+            first_name = _props$initialData$us.first_name,
+            last_name = _props$initialData$us.last_name;
+
+        return _react2.default.createElement(
+          "section",
+          { id: "left-menu" },
           _react2.default.createElement(
             "div",
-            { className: "logo" },
-            _react2.default.createElement("i", { className: "fab fa-korvue" })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "name", onClick: this.clickedDropdown },
-            this.props.initialData.first_name + " " + this.props.initialData.last_name
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "icon", onClick: this.clickedDropdown },
-            _react2.default.createElement("i", { className: "fas fa-chevron-down" })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "dropdown " + (this.state.dropdown ? "active" : "") },
-            _react2.default.createElement(
-              "nav",
-              null,
-              _react2.default.createElement(
-                "a",
-                { href: "/account" },
-                "account"
-              ),
-              _react2.default.createElement(
-                "a",
-                { href: "/logout" },
-                "logout"
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "groups" },
-          _react2.default.createElement(
-            "div",
-            { className: "group" },
+            { className: "account-dropdown" },
             _react2.default.createElement(
               "div",
-              { className: "title" },
-              "Title"
+              { className: "logo" },
+              _react2.default.createElement("i", { className: "fab fa-korvue" })
             ),
             _react2.default.createElement(
-              "ul",
-              null,
+              "div",
+              { className: "name", onClick: this.clickedDropdown },
+              first_name + " " + last_name
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "icon", onClick: this.clickedDropdown },
+              _react2.default.createElement("i", { className: "fas fa-chevron-down" })
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "dropdown " + (this.state.dropdown ? "active" : "") },
               _react2.default.createElement(
-                "li",
+                "nav",
                 null,
                 _react2.default.createElement(
                   "a",
+                  { href: "/account" },
+                  "account"
+                ),
+                _react2.default.createElement(
+                  "a",
                   { href: "/logout" },
-                  "Logout"
+                  "logout"
                 )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "groups" },
+            _react2.default.createElement(
+              "div",
+              { className: "group" },
+              _react2.default.createElement(
+                "div",
+                { className: "title" },
+                "Title"
               ),
               _react2.default.createElement(
-                "li",
+                "ul",
                 null,
-                "Link"
-              ),
-              _react2.default.createElement(
-                "li",
-                null,
-                "Link"
+                _react2.default.createElement(
+                  "li",
+                  null,
+                  _react2.default.createElement(
+                    "a",
+                    { href: "/logout" },
+                    "Logout"
+                  )
+                ),
+                _react2.default.createElement(
+                  "li",
+                  null,
+                  "Link"
+                ),
+                _react2.default.createElement(
+                  "li",
+                  null,
+                  "Link"
+                )
               )
             )
           )
-        )
-      );
+        );
+      }
     }
   }]);
   return LeftMenu;
@@ -281,7 +311,7 @@ exports.default = LeftMenu;
 
 /***/ }),
 
-/***/ 297:
+/***/ 298:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -374,7 +404,7 @@ exports.default = LoadingComp;
 
 /***/ }),
 
-/***/ 298:
+/***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -800,7 +830,7 @@ exports.default = Messenger;
 
 /***/ }),
 
-/***/ 299:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -844,6 +874,195 @@ var Posts = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Posts.__proto__ || Object.getPrototypeOf(Posts)).call(this));
 
+    _this.modContainer = function (post) {
+      if (post.type == "text") {
+        return _react2.default.createElement(
+          "div",
+          { className: "padding-container" },
+          _react2.default.createElement(
+            "div",
+            { className: "mod-container" },
+            _react2.default.createElement(
+              "div",
+              { className: "update-info" },
+              _react2.default.createElement(
+                "h3",
+                null,
+                "How to become a developer"
+              ),
+              _react2.default.createElement(
+                "p",
+                null,
+                post.content
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "update-stats" },
+              _react2.default.createElement(
+                "div",
+                { className: "icon-section" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "like-circle" },
+                  _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "other-users" },
+                "John Doe and 13 others liked update"
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "comments-stats" },
+                "4 comments"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "compose-comment" },
+              _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
+              _react2.default.createElement(
+                "div",
+                { className: "buttons" },
+                _react2.default.createElement(
+                  "div",
+                  { className: "repost-btn" },
+                  _react2.default.createElement("i", { className: "fas fa-redo" })
+                ),
+                _react2.default.createElement(
+                  "div",
+                  { className: "like-btn" },
+                  _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
+                )
+              )
+            )
+          )
+        );
+      }
+      return _react2.default.createElement(
+        "div",
+        { className: "padding-container" },
+        _react2.default.createElement(
+          "div",
+          { className: "grey-container" },
+          _react2.default.createElement(
+            "div",
+            { className: "update-info" },
+            _react2.default.createElement(
+              "h3",
+              null,
+              "How to become a developer"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              post.content
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "update-stats" },
+            _react2.default.createElement(
+              "div",
+              { className: "icon-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "like-circle" },
+                _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "other-users" },
+              "John Doe and 13 others liked update"
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "comments-stats" },
+              "4 comments"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "compose-comment" },
+            _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
+            _react2.default.createElement(
+              "div",
+              { className: "buttons" },
+              _react2.default.createElement(
+                "div",
+                { className: "repost-btn" },
+                _react2.default.createElement("i", { className: "fas fa-redo" })
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "like-btn" },
+                _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
+              )
+            )
+          )
+        )
+      );
+    };
+
+    _this.showLatestPosts = function () {
+      if (_this.props.initialData.latestPosts != undefined) {
+        return _this.props.initialData.latestPosts.map(function (item) {
+          var post = item.posts;
+          var user = item.users;
+          console.log(item);
+          return _react2.default.createElement(
+            "div",
+            { className: "update-container" },
+            _react2.default.createElement(
+              "div",
+              { className: "author-info" },
+              _react2.default.createElement("a", {
+                href: "#",
+                className: "user-img",
+                style: {
+                  backgroundImage: "url('" + user.profile_img + "')"
+                }
+              }),
+              _react2.default.createElement(
+                "div",
+                { className: "info" },
+                _react2.default.createElement(
+                  "a",
+                  { href: "/profile" },
+                  user.first_name + " " + user.last_name
+                ),
+                " ",
+                "shared a",
+                " ",
+                _react2.default.createElement(
+                  "a",
+                  { href: "#" },
+                  post.type == "text" ? "story" : "image"
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "media" },
+              _react2.default.createElement("div", {
+                className: "" + (post.type == "text" ? "story" : "image"),
+                style: {
+                  background: 'url("https://media.swncdn.com/cms/CW/Couples/singles/35894-nature-sky-sunset-man-pexels.1200w.tn.jpg")',
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover"
+                }
+              })
+            ),
+            _this.modContainer(post)
+          );
+        });
+      }
+    };
+
     _this.state = {
       name: "Joe"
     };
@@ -856,309 +1075,7 @@ var Posts = function (_Component) {
       return _react2.default.createElement(
         "section",
         { id: "posts" },
-        _react2.default.createElement(
-          "div",
-          { className: "update-container" },
-          _react2.default.createElement(
-            "div",
-            { className: "author-info" },
-            _react2.default.createElement("a", { href: "#", className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "info" },
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "James Doe"
-              ),
-              " shared a ",
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "story"
-              )
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "media" },
-            _react2.default.createElement("div", {
-              className: "image",
-              style: {
-                background: 'url("https://media.swncdn.com/cms/CW/Couples/singles/35894-nature-sky-sunset-man-pexels.1200w.tn.jpg")',
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
-              }
-            })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "padding-container" },
-            _react2.default.createElement(
-              "div",
-              { className: "grey-container" },
-              _react2.default.createElement(
-                "div",
-                { className: "update-info" },
-                _react2.default.createElement(
-                  "h3",
-                  null,
-                  "How to become a developer"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  null,
-                  "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "update-stats" },
-                _react2.default.createElement(
-                  "div",
-                  { className: "icon-section" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-circle" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "other-users" },
-                  "John Doe and 13 others liked update"
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "comments-stats" },
-                  "4 comments"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "compose-comment" },
-                _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
-                _react2.default.createElement(
-                  "div",
-                  { className: "buttons" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "repost-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-redo" })
-                  ),
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "update-container" },
-          _react2.default.createElement(
-            "div",
-            { className: "author-info" },
-            _react2.default.createElement("a", { href: "#", className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "info" },
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "James Doe"
-              ),
-              " shared a ",
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "story"
-              )
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "media" },
-            _react2.default.createElement("div", {
-              className: "image",
-              style: {
-                background: 'url("https://media.swncdn.com/cms/CW/Couples/singles/35894-nature-sky-sunset-man-pexels.1200w.tn.jpg")',
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
-              }
-            })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "padding-container" },
-            _react2.default.createElement(
-              "div",
-              { className: "grey-container" },
-              _react2.default.createElement(
-                "div",
-                { className: "update-info" },
-                _react2.default.createElement(
-                  "h3",
-                  null,
-                  "How to become a developer"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  null,
-                  "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "update-stats" },
-                _react2.default.createElement(
-                  "div",
-                  { className: "icon-section" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-circle" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "other-users" },
-                  "John Doe and 13 others liked update"
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "comments-stats" },
-                  "4 comments"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "compose-comment" },
-                _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
-                _react2.default.createElement(
-                  "div",
-                  { className: "buttons" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "repost-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-redo" })
-                  ),
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "update-container" },
-          _react2.default.createElement(
-            "div",
-            { className: "author-info" },
-            _react2.default.createElement("a", { href: "#", className: "user-img" }),
-            _react2.default.createElement(
-              "div",
-              { className: "info" },
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "James Doe"
-              ),
-              " shared a ",
-              _react2.default.createElement(
-                "a",
-                { href: "#" },
-                "story"
-              )
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "media" },
-            _react2.default.createElement("div", {
-              className: "image",
-              style: {
-                background: 'url("https://media.swncdn.com/cms/CW/Couples/singles/35894-nature-sky-sunset-man-pexels.1200w.tn.jpg")',
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
-              }
-            })
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "padding-container" },
-            _react2.default.createElement(
-              "div",
-              { className: "grey-container" },
-              _react2.default.createElement(
-                "div",
-                { className: "update-info" },
-                _react2.default.createElement(
-                  "h3",
-                  null,
-                  "How to become a developer"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  null,
-                  "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "update-stats" },
-                _react2.default.createElement(
-                  "div",
-                  { className: "icon-section" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-circle" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "other-users" },
-                  "John Doe and 13 others liked update"
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { className: "comments-stats" },
-                  "4 comments"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "compose-comment" },
-                _react2.default.createElement("textarea", { name: "name", rows: 8, cols: 80, defaultValue: "" }),
-                _react2.default.createElement(
-                  "div",
-                  { className: "buttons" },
-                  _react2.default.createElement(
-                    "div",
-                    { className: "repost-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-redo" })
-                  ),
-                  _react2.default.createElement(
-                    "div",
-                    { className: "like-btn" },
-                    _react2.default.createElement("i", { className: "fas fa-thumbs-up" })
-                  )
-                )
-              )
-            )
-          )
-        )
+        this.showLatestPosts()
       );
     }
   }]);
@@ -1169,7 +1086,7 @@ exports.default = Posts;
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1278,7 +1195,7 @@ exports.default = SearchHeader;
 
 /***/ }),
 
-/***/ 321:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1320,27 +1237,27 @@ var _axios = __webpack_require__(189);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _LeftMenu = __webpack_require__(296);
+var _LeftMenu = __webpack_require__(297);
 
 var _LeftMenu2 = _interopRequireDefault(_LeftMenu);
 
-var _Messenger = __webpack_require__(298);
+var _Messenger = __webpack_require__(299);
 
 var _Messenger2 = _interopRequireDefault(_Messenger);
 
-var _SearchHeader = __webpack_require__(300);
+var _SearchHeader = __webpack_require__(301);
 
 var _SearchHeader2 = _interopRequireDefault(_SearchHeader);
 
-var _ComposeSection = __webpack_require__(295);
+var _ComposeSection = __webpack_require__(296);
 
 var _ComposeSection2 = _interopRequireDefault(_ComposeSection);
 
-var _Posts = __webpack_require__(299);
+var _Posts = __webpack_require__(300);
 
 var _Posts2 = _interopRequireDefault(_Posts);
 
-var _LoadingComp = __webpack_require__(297);
+var _LoadingComp = __webpack_require__(298);
 
 var _LoadingComp2 = _interopRequireDefault(_LoadingComp);
 
@@ -1452,8 +1369,12 @@ var Layout = function (_Component) {
           _react2.default.createElement(
             "div",
             { className: "content-area" },
-            _react2.default.createElement(_ComposeSection2.default, null),
-            _react2.default.createElement(_Posts2.default, null)
+            _react2.default.createElement(_ComposeSection2.default, {
+              initialData: this.state.initialData == undefined ? "loading" : this.state.initialData
+            }),
+            _react2.default.createElement(_Posts2.default, {
+              initialData: this.state.initialData == undefined ? "loading" : this.state.initialData
+            })
           )
         ),
         _react2.default.createElement(_Messenger2.default, null)
@@ -1469,4 +1390,4 @@ _reactDom2.default.render(_react2.default.createElement(Layout, null), app);
 
 /***/ })
 
-},[321]);
+},[322]);

@@ -14,41 +14,44 @@ export default class LeftMenu extends Component {
     });
   };
   render() {
-    return (
-      <section id="left-menu">
-        <div className="account-dropdown">
-          <div className="logo">
-            <i className="fab fa-korvue" />
-          </div>
-          <div className="name" onClick={this.clickedDropdown}>
-            {`${this.props.initialData.first_name} ${
-              this.props.initialData.last_name
-            }`}
-          </div>
-          <div className="icon" onClick={this.clickedDropdown}>
-            <i className="fas fa-chevron-down" />
-          </div>
+    if (this.props.initialData.userInfo == undefined) {
+      return <div>Loading</div>;
+    } else {
+      const { first_name, last_name } = this.props.initialData.userInfo;
+      return (
+        <section id="left-menu">
+          <div className="account-dropdown">
+            <div className="logo">
+              <i className="fab fa-korvue" />
+            </div>
+            <div className="name" onClick={this.clickedDropdown}>
+              {`${first_name} ${last_name}`}
+            </div>
+            <div className="icon" onClick={this.clickedDropdown}>
+              <i className="fas fa-chevron-down" />
+            </div>
 
-          <div className={`dropdown ${this.state.dropdown ? "active" : ""}`}>
-            <nav>
-              <a href="/account">account</a>
-              <a href="/logout">logout</a>
-            </nav>
+            <div className={`dropdown ${this.state.dropdown ? "active" : ""}`}>
+              <nav>
+                <a href="/account">account</a>
+                <a href="/logout">logout</a>
+              </nav>
+            </div>
           </div>
-        </div>
-        <div className="groups">
-          <div className="group">
-            <div className="title">Title</div>
-            <ul>
-              <li>
-                <a href="/logout">Logout</a>
-              </li>
-              <li>Link</li>
-              <li>Link</li>
-            </ul>
+          <div className="groups">
+            <div className="group">
+              <div className="title">Title</div>
+              <ul>
+                <li>
+                  <a href="/logout">Logout</a>
+                </li>
+                <li>Link</li>
+                <li>Link</li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </section>
-    );
+        </section>
+      );
+    }
   }
 }
