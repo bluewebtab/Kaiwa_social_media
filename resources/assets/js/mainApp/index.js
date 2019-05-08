@@ -79,7 +79,7 @@ class Layout extends Component {
             />
             <Route
               exact
-              path="/profile"
+              path="/profile/:id"
               component={props => (
                 <Profile
                   routeProps={props}

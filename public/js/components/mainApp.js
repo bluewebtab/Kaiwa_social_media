@@ -1274,9 +1274,77 @@ var Profile = function (_Component) {
   (0, _inherits3.default)(Profile, _Component);
 
   function Profile() {
+    var _this2 = this;
+
     (0, _classCallCheck3.default)(this, Profile);
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this));
+
+    _this.followUser = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+      var _this$props$routeProp, match, location, history, self, userProfile, _userProfile;
+
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this$props$routeProp = _this.props.routeProps, match = _this$props$routeProp.match, location = _this$props$routeProp.location, history = _this$props$routeProp.history;
+              self = _this;
+
+              if (!_this.state.following) {
+                _context.next = 15;
+                break;
+              }
+
+              _context.prev = 3;
+              _context.next = 6;
+              return _axios2.default.get("/api/user/" + match.params.id + "/unfollow");
+
+            case 6:
+              userProfile = _context.sent;
+
+              self.setState({
+                following: !self.state.following
+              });
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](3);
+
+              console.log(_context.t0);
+
+            case 13:
+              _context.next = 25;
+              break;
+
+            case 15:
+              _context.prev = 15;
+              _context.next = 18;
+              return _axios2.default.get("/api/user/" + match.params.id + "/follow");
+
+            case 18:
+              _userProfile = _context.sent;
+
+              self.setState({
+                following: !self.state.following
+              });
+              _context.next = 25;
+              break;
+
+            case 22:
+              _context.prev = 22;
+              _context.t1 = _context["catch"](15);
+
+              console.log(_context.t1);
+
+            case 25:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, _this2, [[3, 10], [15, 22]]);
+    }));
 
     _this.state = {
       name: "Joe"
@@ -1286,40 +1354,96 @@ var Profile = function (_Component) {
 
   (0, _createClass3.default)(Profile, [{
     key: "componentWillMount",
-    value: function () {
-      var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-        return _regenerator2.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                this.setState({
-                  initialData: this.props.initialData
-                }, function () {
-                  console.log(self.state);
-                });
+    value: function componentWillMount() {
+      var _props$routeProps = this.props.routeProps,
+          match = _props$routeProps.match,
+          location = _props$routeProps.location,
+          history = _props$routeProps.history;
 
-              case 1:
-              case "end":
-                return _context.stop();
+      var self = this;
+      var getUser = function () {
+        var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+          var userProfile;
+          return _regenerator2.default.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  _context2.next = 3;
+                  return _axios2.default.get("/api/user/" + match.params.id);
+
+                case 3:
+                  userProfile = _context2.sent;
+
+                  self.setState({
+                    initialData: self.props.initialData,
+                    userProfile: userProfile.data.user[0],
+                    following: userProfile.data.following
+                  }, function () {
+                    console.log(self.state);
+                  });
+                  _context2.next = 10;
+                  break;
+
+                case 7:
+                  _context2.prev = 7;
+                  _context2.t0 = _context2["catch"](0);
+
+                  console.log(_context2.t0);
+
+                case 10:
+                case "end":
+                  return _context2.stop();
+              }
             }
-          }
-        }, _callee, this);
-      }));
+          }, _callee2, this, [[0, 7]]);
+        }));
 
-      function componentWillMount() {
-        return _ref.apply(this, arguments);
-      }
-
-      return componentWillMount;
-    }()
+        return function getUser() {
+          return _ref2.apply(this, arguments);
+        };
+      }();
+      getUser();
+    }
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "content-area" },
-        "This is the users profile"
-      );
+      if (this.state.userProfile !== undefined) {
+        var _state$userProfile = this.state.userProfile,
+            first_name = _state$userProfile.first_name,
+            last_name = _state$userProfile.last_name,
+            profile_img = _state$userProfile.profile_img;
+
+        return _react2.default.createElement(
+          "div",
+          { className: "content-area profile-page" },
+          _react2.default.createElement(
+            "div",
+            { className: "user-img" },
+            _react2.default.createElement("img", { src: "" + profile_img })
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "info" },
+            _react2.default.createElement(
+              "h1",
+              null,
+              first_name + " " + last_name
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "follow-btn", onClick: this.followUser },
+              this.state.following ? "unfollow" : "follow"
+            )
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          "div",
+          { className: "content-area profile-page" },
+          "Loading"
+        );
+      }
     }
   }]);
   return Profile;
@@ -1636,7 +1760,7 @@ var Layout = function (_Component) {
             }),
             _react2.default.createElement(_reactRouterDom.Route, {
               exact: true,
-              path: "/profile",
+              path: "/profile/:id",
               component: function component(props) {
                 return _react2.default.createElement(_Profile2.default, {
                   routeProps: props,
